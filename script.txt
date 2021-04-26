@@ -1,0 +1,30 @@
+if game.Players.LocalPlayer.UserId == 831669 then
+print("Access Enabled")
+else
+game.Players.LocalPlayer:Kick("You're not Whitelisted! (Join dsc.gg/infinityx to buy!)")
+print("Denied")
+end
+
+game:GetService("StarterGui"):SetCore("SendNotification", {Title = "Infinity X Loaded!", Text = "Join Discord: dsc.gg/infinityx", Icon = "rbxassetid://105540093"})
+
+local Players = game:GetService('Players')
+local LocalPlayer = Players.LocalPlayer
+
+local EveryReset = function()
+    pcall(function()
+        repeat wait() until LocalPlayer.Character:FindFirstChild('M9') or LocalPlayer.Backpack:FindFirstChild('M9') and #LocalPlayer.Backpack:FindFirstChild('M9'):GetChildren() > 3
+        local M9 = LocalPlayer.Character:FindFirstChild('M9') or LocalPlayer.Backpack:FindFirstChild('M9')
+        if M9 then
+            M9.Name = 'M9 '
+        end
+        for _,v in next, getgc(true) do 
+            if type(v) == "table" and rawget(v, 'ReloadTime') then 
+                v.ReloadTime = 1
+                v.FireRate = 0.04
+                v.FireMode = 'Auto'
+            end
+        end
+    end)
+end
+
+EveryReset(); LocalPlayer.CharacterAdded:Connect(EveryReset)
